@@ -1,3 +1,8 @@
+/*
+ * This is used to implement all the ui functions in here.
+ * its not done yet!
+ */ 
+
 var ui=this;
 $(this).on("bus", function(event, action ,msg) {
 	switch(action) {

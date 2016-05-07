@@ -1,6 +1,8 @@
-//var socket = io('http://127.0.0.1:8081');
+/*
+ * This is using to implement the client class.
+ * its not dont yet.
+ */
 var socket;
-
 
 function connectToServer(username) {
 	

@@ -1,18 +1,30 @@
-var socketio = require('socket.io');
-var channels = [];
-var users = [];
+/* * * * * * * * * * * * * * * * 
+ *  Multi Room Chat Server	   *
+ * ------------------------    *
+ *  Developed By Doron Rainer  *
+ *                             *
+ * * * * * * * * * * * * * * * */
+
+var socketio = require('socket.io'); // socket.io library is awesome!!
+var channels = []; // Array for keeping all opened channels in server.
+var users = []; // Array for keeping al connected users.
 
 require('./library/functions.js')();
 
+/*
+ * Apprently exports used to exports some data\function\objects
+ * to entire NodeJS's app. thats awesome!!!
+ * I use here to make socket server to listen
+ * and i calling to the listen function on 'server.js'
+ */ 
 exports.listen = function(server) {
-	//channels["#Lobby"] = { users: [] };
-	var socket = socketio.listen(server);
-	socket.sockets.on('connection', function(socket) {	
-		users[socket.id] = { username: socket.request._query["username"], ip: socket.handshake.address, channels: [] };
-		joinChannel(socket, "#Lobby");
-		socket.on("disconnect", function(){
-			leaveChannel(socket, "#Lobby");
-			delete users[socket.id];
+	var socketio = socketio.listen(server); // Creating socket.io object, and make it listening for connections.
+	socketio.sockets.on('connection', function(socket) { // Trigger for connection event
+		users[socket.id] = { username: socket.request._query["username"], ip: socket.handshake.address, channels: [] }; // Just add the connection to the users array, with the socket id and client's ip. also save place to keeps the channels that the client is on.
+		joinChannel(socket, "#Lobby"); // Join the client as i connects to the #Lobby channel.
+		socket.on("disconnect", function(){ // Trigger for disconnection event
+			leaveChannel(socket, "#Lobby"); // Record that client left the channel
+			delete users[socket.id]; // Delete him from the users array
 		});
 	});
 }
