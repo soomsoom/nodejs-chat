@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Chat</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/lib/ui.js"></script>
+</head>
+
+<body>
+	<input type='text' id='username' placeholder='Username' style="width: 85%;"/>
+	<button id='connect'>Connect</button>
+	<br>
+	<textarea id='conversation' style="width: 85%;" rows='40' readonly></textarea>
+	<br/>
+	<input type='text' placeholder='Say Something here...' id='textsend' style="width: 85%;" readonly='true'>
+	<button id='send' disabled='true'>Send</button>
+	<script src="/lib/client.js"></script>
+	
+	
+	
+
+</body>
+
+</html>
